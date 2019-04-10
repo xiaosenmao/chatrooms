@@ -43,16 +43,20 @@ function serveStatic(response, cache, absPath) {
 const server = http.createServer((request, response) => {
     let filePath = false;
 
-    if (request.url !== '/') {
+    if (request.url == '/') {
         filePath = 'public/index.html';
     } else {
         filePath = 'public' + request.url;
     }
 
     const absPath = './' + filePath;
+    console.log(absPath);
     serveStatic(response, cache, absPath); // 返回静态文件
 });
 
 server.listen(3000, () => {
     console.log('Server listening on port 3000.');
 });
+
+const chatServer = reqiure('./lib/chat_server');
+chatServer.listen(server);
